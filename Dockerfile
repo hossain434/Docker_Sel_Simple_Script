@@ -1,9 +1,20 @@
 FROM openjdk:8-jre-slim
 
-# Add the jar with all the dependencies
-# Maven creates container-test.jar in the target folder of my workspace.
-# We need this in some location - say - /usr/share/tag folder of the container
-ADD  target/container-testing-0.0.1-SNAPSHOT.jar /usr/share/tag/container-testing-0.0.1-SNAPSHOT.jar
+#A Directory in the base image to copy our depedencies
+WORKDIR /usr/share/tag
+
+# Add the project jar & copy dependencies
+ADD  target/container-test.jar container-test.jar
+ADD  target/libs libs
+
+# Add the suite xmls
+ADD suite/order-module.xml order-module.xml
+ADD suite/search-module.xml search-module.xml
 
 # Command line to execute the test
-ENTRYPOINT ["/usr/bin/java", "-cp",  "/usr/share/tag/container-testing.jar", "org.testng.TestNG", "-testclass", "seleniumInDocker.GoogleTest"]
+# Expects below ennvironment variables
+# BROWSER = chrome / firefox
+# MODULE  = order-module / search-module
+# SELENIUM_HUB = selenium hub hostname / ipaddress
+
+ENTRYPOINT java -cp container-test.jar:libs/* -DseleniumHubHost=$SELENIUM_HUB -Dbrowser=$BROWSER org.testng.TestNG $MODULE
