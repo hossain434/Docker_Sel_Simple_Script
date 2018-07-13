@@ -35,9 +35,9 @@
     <configuration>
         <!-- vinsdocker is org name. -->
         <!-- containertest is the name of the image /  application  -->
-        <repository>vinsdocker/containertest</repository>
+        <repository>arif/order-search</repository>
         <!-- version of your image: could be sprint11 or release5 etc -->
-        <tag>googletest</tag>
+        <tag>latest</tag>
     </configuration>
 </plugin>
       </plugins>
