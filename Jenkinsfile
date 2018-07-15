@@ -8,7 +8,7 @@ pipeline {
     stages {    
         stage('Build Jar') {
             steps {
-                bat 'mvn clean install package'
+                bat 'mvn clean package'
             }
         }
         stage('Build Image') {
