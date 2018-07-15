@@ -5,12 +5,7 @@ pipeline {
     }
 
   }
-  stages {
-    stage('Build Jar') {
-      steps {
-       bash sh 'mvn clean package -DskipTests'
-      }
-    }
+ 
     stage('Build Image') {
       steps {
         script {
