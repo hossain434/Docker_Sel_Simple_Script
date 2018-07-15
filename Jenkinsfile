@@ -4,12 +4,17 @@ pipeline {
             label 'docker' && 'maven'
         }
     }
-
+    stages {    
+        stage('Build Jar') {
+            steps {
+                bat 'mvn clean install package'
+            }
+        }
         stage('Build Image') {
             steps {
                 script {
                       // vinsdocker/containertest => organization/application - it could be anything
-                      app = docker.build("vinsdocker/containertest")
+                      app = docker.build("arif/test")
                 }
             }
         }
@@ -24,4 +29,4 @@ pipeline {
             }
         }        
     }
-
+}
