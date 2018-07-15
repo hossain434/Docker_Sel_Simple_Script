@@ -1,12 +1,9 @@
 pipeline {
-    agent {
-        node {
-            label 'docker' && 'maven'
-        }
+    agent any
             tools { 
         maven 'Maven 3.3.9' 
         jdk 'jdk8' 
-    }
+    
     }
     stages {    
         stage('Build Jar') {
