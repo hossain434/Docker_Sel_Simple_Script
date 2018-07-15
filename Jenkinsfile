@@ -4,12 +4,7 @@ pipeline {
             label 'docker' && 'maven'
         }
     }
-    stages {    
-        stage('Build Jar') {
-            steps {
-                bat "mvn clean install"
-            }
-        }
+
         stage('Build Image') {
             steps {
                 script {
@@ -29,4 +24,4 @@ pipeline {
             }
         }        
     }
-}
+
